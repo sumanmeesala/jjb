@@ -17,9 +17,9 @@ def createMatrixJob(environment) {
         listView.save()
     }
 
-    // Create a Matrix Project
+    // Create a Matrix Job
     def jobName = "MyMatrixJob_${environment}"
-    def job = new MatrixProject(jenkins, jobName)
+    def job = new MatrixJob(jenkins, jobName)
     job.save()
 
     // Set log rotation
@@ -35,8 +35,7 @@ def createMatrixJob(environment) {
 
     // Configure source code management (none)
 
-    // Define the axes for the Matrix Project
-
+    // Define the axes for the Matrix Job
 
     // Add an Execute Shell build step
     job.getBuildersList().add(new Shell("echo 'Hello, Jenkins! This is ${environment}'"))
