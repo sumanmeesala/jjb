@@ -3,10 +3,9 @@ import hudson.model.*
 import hudson.model.StringParameterDefinition
 import hudson.tasks.*
 import hudson.tasks.Shell
-import hudson.scm.NullSCM
 import hudson.util.*
 
-def createJenkinsJob(environment) {
+def createMatrixJob(environment) {
     def jenkins = Jenkins.getInstance()
 
     // Check if the view already exists, and create it if not
@@ -18,9 +17,9 @@ def createJenkinsJob(environment) {
         listView.save()
     }
 
-    // Create a FreeStyle job
-    def jobName = "MyJob_${environment}"
-    def job = new FreeStyleProject(jenkins, jobName)
+    // Create a Matrix Project
+    def jobName = "MyMatrixJob_${environment}"
+    def job = new MatrixProject(jenkins, jobName)
     job.save()
 
     // Set log rotation
@@ -36,21 +35,18 @@ def createJenkinsJob(environment) {
 
     // Configure source code management (none)
 
+    // Define the axes for the Matrix Project
+
 
     // Add an Execute Shell build step
     job.getBuildersList().add(new Shell("echo 'Hello, Jenkins! This is ${environment}'"))
 
     job.save()
-
 }
 
 // Call the function with the desired 'env' value
 // Replace with your desired environment
 def environment = env
-println("View '$environment' created.")
-createJenkinsJob(environment)
-
-    jenkins.save()
-
-
+println("Matrix Job '$environment' created.")
+createMatrixJob(environment)
 
