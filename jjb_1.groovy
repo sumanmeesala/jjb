@@ -4,12 +4,8 @@ import hudson.tasks.*
 import hudson.plugins.parameterizedtrigger.*
 import hudson.plugins.parameterizedtrigger.jobs.*
 import hudson.tasks.Shell
-package hudson.cli;
-import hudson.matrix.*
-import hudson.util.*
-import javaposse.jobdsl.dsl.DslFactory
-
-
+import hudson.plugins.matrix.*
+import hudson.slaves.*
 
 def createJenkinsJob(env) {
     def jenkins = Jenkins.instance
