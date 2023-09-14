@@ -4,10 +4,8 @@ import hudson.tasks.*
 import hudson.plugins.parameterizedtrigger.*
 import hudson.plugins.parameterizedtrigger.jobs.*
 import hudson.tasks.Shell
-import hudson.plugins.matrix.*
-import hudson.slaves.*
 
-def createMultiConfigJob(env) {
+def createJenkinsJob(env) {
     def jenkins = Jenkins.instance
 
     // Create a view
@@ -16,46 +14,38 @@ def createMultiConfigJob(env) {
     listView.owner = jenkins
     listView.save()
 
-    // Create a multi-configuration job
-    def jobName = "MultiConfigJob_${env}"
-    def multiConfigJob = new MatrixProject(jenkins, jobName)
-    multiConfigJob.save()
+    // Create a job
+    def jobName = "MyJob_${env}"
+    def job = new FreeStyleProject(jenkins, jobName)
+    job.save()
 
     // Set log rotation
-    multiConfigJob.buildDiscarder = new LogRotator(4, -1, -1, -1)
+    job.buildDiscarder = new LogRotator(4, -1, -1, -1)
 
     // Add a string parameter
-    multiConfigJob.addProperty(new ParametersDefinitionProperty(
+    job.addProperty(new ParametersDefinitionProperty(
         new StringParameterDefinition("custName", "NONE")
     ))
 
-   // Enable concurrent builds
-    multiConfigJob.concurrentBuild = true
+    // Enable concurrent builds
+    job.concurrentBuild = true
 
     // Configure source code management (none)
-    multiConfigJob.scm = new NullSCM()
+    job.scm = new NullSCM()
 
-    // Define axes
-    def axis1 = new Axis("Axis1", "Value1 Value2 Value3")
-    def axis2 = new Axis("Axis2", "ValueA ValueB ValueC")
+    // Add dynamic axis
+    job.getAxes().add(new DynamicAxis("DynamicAxisName", "DynamicAxisValues"))
 
-    // Add axes to the job
-    multiConfigJob.setAxes(new Axes(axis1, axis2))
+    // Add user-defined axis
+    job.getAxes().add(new UserDefinedAxis("AxisName", "AxisValues"))
 
     // Add an Execute Shell build step
-    multiConfigJob.getBuildersList().add(new Shell("echo 'Hello, Jenkins! This is ${env}'"))
+    job.getBuildersList().add(new Shell("echo 'Hello, Jenkins! This is ${env}'"))
 
-    multiConfigJob.save()
+    job.save()
 }
 
 // Call the function with the desired 'env' value
 // Replace with your desired environment
-createMultiConfigJob(env)
-
-
-
-
-
-
-
+createJenkinsJob(env)
 
