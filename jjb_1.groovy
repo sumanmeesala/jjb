@@ -1,12 +1,13 @@
-
-
+import jenkins.model.*
 import hudson.model.*
 import hudson.model.StringParameterDefinition
 import hudson.tasks.*
 import hudson.tasks.Shell
+import hudson.scm.NullSCM
+import hudson.util.LogRotator
 
 def createJenkinsJob(env) {
-    def jenkins = Hudson.instance()
+    def jenkins = Jenkins.getInstance()
 
     // Check if the view already exists, and create it if not
     def viewName = "MyView_${env}"
