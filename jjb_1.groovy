@@ -6,7 +6,7 @@ import hudson.tasks.*
 import hudson.tasks.Shell
 
 def createJenkinsJob(env) {
-    def jenkins = Jenkins.getInstance()
+    def jenkins = Hudson.instance()
 
     // Check if the view already exists, and create it if not
     def viewName = "MyView_${env}"
@@ -46,5 +46,5 @@ def createJenkinsJob(env) {
 
 // Call the function with the desired 'env' value
 // Replace with your desired environment
-createJenkinsJob("Development")
+createJenkinsJob(env)
 
