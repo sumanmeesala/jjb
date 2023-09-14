@@ -35,9 +35,7 @@ def createJenkinsJob(env) {
     job.concurrentBuild = true
 
     // Configure source code management (none)
-    job.scm {
-    none()
-    }
+
 
     // Add an Execute Shell build step
     job.getBuildersList().add(new Shell("echo 'Hello, Jenkins! This is ${env}'"))
