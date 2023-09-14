@@ -6,11 +6,11 @@ import hudson.tasks.Shell
 import hudson.scm.NullSCM
 import hudson.util.*
 
-def createJenkinsJob(env) {
+def createJenkinsJob(environment) {
     def jenkins = Jenkins.getInstance()
 
     // Check if the view already exists, and create it if not
-    def viewName = "MyView_${env}"
+    def viewName = "MyView_${environment}"
     def listView = jenkins.getView(viewName)
     if (listView == null) {
         listView = new ListView(viewName, jenkins)
@@ -19,7 +19,7 @@ def createJenkinsJob(env) {
     }
 
     // Create a FreeStyle job
-    def jobName = "MyJob_${env}"
+    def jobName = "MyJob_${environment}"
     def job = new FreeStyleProject(jenkins, jobName)
     job.save()
 
@@ -38,12 +38,13 @@ def createJenkinsJob(env) {
 
 
     // Add an Execute Shell build step
-    job.getBuildersList().add(new Shell("echo 'Hello, Jenkins! This is ${env}'"))
+    job.getBuildersList().add(new Shell("echo 'Hello, Jenkins! This is ${environment}'"))
 
     job.save()
 }
 
 // Call the function with the desired 'env' value
 // Replace with your desired environment
-createJenkinsJob(env)
+def environment = env
+createJenkinsJob(environment)
 
