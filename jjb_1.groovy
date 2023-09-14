@@ -4,15 +4,24 @@ import hudson.tasks.*
 import hudson.plugins.parameterizedtrigger.*
 import hudson.plugins.parameterizedtrigger.jobs.*
 import hudson.tasks.Shell
+package hudson.cli;
+import hudson.matrix.*
+import hudson.util.*
+import javaposse.jobdsl.dsl.DslFactory
+
+
 
 def createJenkinsJob(env) {
     def jenkins = Jenkins.instance
-
-    // Create a view
+    
+        // Check if the view already exists, and create it if not
     def viewName = "MyView_${env}"
-    def listView = new ListView(viewName, jenkins)
-    listView.owner = jenkins
-    listView.save()
+    def listView = jenkins.getView(viewName)
+    if (listView == null) {
+        listView = new ListView(viewName, jenkins)
+        listView.owner = jenkins
+        listView.save()
+    }
 
     // Create a job
     def jobName = "MyJob_${env}"
@@ -48,4 +57,5 @@ def createJenkinsJob(env) {
 // Call the function with the desired 'env' value
 // Replace with your desired environment
 createJenkinsJob(env)
+
 
