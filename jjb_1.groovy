@@ -45,6 +45,10 @@ def createJenkinsJob(environment) {
 
 // Call the function with the desired 'env' value
 // Replace with your desired environment
-def environment = env
+def environment = $env
 createJenkinsJob(environment)
+
+
+
+
 
