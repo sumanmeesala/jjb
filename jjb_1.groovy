@@ -50,6 +50,6 @@ def createJenkinsJob(env) {
 
 // Call the function with the desired 'env' value
 // Replace with your desired environment
-createJenkinsJob(env)
+createJenkinsJob("DEV")
 
 
