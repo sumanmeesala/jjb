@@ -1,16 +1,16 @@
 def env = envParam.get('env')
 
-def viewExists = Jenkins.instance.views.find { it.name == 'SampleCS_'+env }
+def viewExists = Jenkins.instance.views.find { it.name == 'SampleCS_' + env +'' }
 
 if (!viewExists) {
-  def view = new View(name: 'SampleCS_'+env)
+  def view = new View(name: 'SampleCS_' + env +'')
   view.description = "Jenkins view for ${env}"
   view.jobs = ['job1', 'job2']
 
   Jenkins.instance.addView(view)
 }
 
-def job = Jenkins.instance.getItemByFullName(env + '_job')
+def job = Jenkins.instance.getItemByFullName('SampleCSJob_' + env +'')
 
 if (!job) {
   def jobConfig = """
