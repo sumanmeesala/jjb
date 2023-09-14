@@ -4,7 +4,7 @@ import hudson.model.StringParameterDefinition
 import hudson.tasks.*
 import hudson.tasks.Shell
 import hudson.scm.NullSCM
-import hudson.util.LogRotator
+import hudson.util.*
 
 def createJenkinsJob(env) {
     def jenkins = Jenkins.getInstance()
