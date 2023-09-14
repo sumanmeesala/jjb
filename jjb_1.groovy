@@ -7,6 +7,7 @@ import hudson.tasks.Shell
 import hudson.plugins.matrix.*
 import hudson.slaves.*
 
+
 def createJenkinsJob(env) {
     def jenkins = Jenkins.instance
     
@@ -36,7 +37,9 @@ def createJenkinsJob(env) {
     job.concurrentBuild = true
 
     // Configure source code management (none)
-    job.scm = new NullSCM()
+    job.scm {
+    none()
+    }
 
     // Add dynamic axis
     job.getAxes().add(new DynamicAxis("DynamicAxisName", "DynamicAxisValues"))
