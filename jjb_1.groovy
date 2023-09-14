@@ -41,6 +41,7 @@ def createJenkinsJob(environment) {
     job.getBuildersList().add(new Shell("echo 'Hello, Jenkins! This is ${environment}'"))
 
     job.save()
+    jenkins.save()
 }
 
 // Call the function with the desired 'env' value
