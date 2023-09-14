@@ -41,11 +41,6 @@ def createJenkinsJob(env) {
     none()
     }
 
-    // Add dynamic axis
-    job.getAxes().add(new DynamicAxis("DynamicAxisName", "DynamicAxisValues"))
-
-    // Add user-defined axis
-    job.getAxes().add(new UserDefinedAxis("AxisName", "AxisValues"))
 
     // Add an Execute Shell build step
     job.getBuildersList().add(new Shell("echo 'Hello, Jenkins! This is ${env}'"))
