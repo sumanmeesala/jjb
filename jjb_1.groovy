@@ -48,7 +48,7 @@ def createJenkinsJob(environment) {
 // Replace with your desired environment
 def environment = env
 println("View '$environment' created.")
-createJenkinsJob($environment)
+createJenkinsJob(environment)
 
 
 
