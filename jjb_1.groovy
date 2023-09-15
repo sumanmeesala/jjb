@@ -1,10 +1,6 @@
-import jenkins.model.*
 import hudson.model.*
-import hudson.model.StringParameterDefinition
 import hudson.tasks.*
-import hudson.tasks.Shell
-import hudson.scm.NullSCM
-import hudson.util.*
+import hudson.util.Secret
 
 def createMatrixJob(env) {
     def jenkins = Jenkins.getInstance()
@@ -18,9 +14,9 @@ def createMatrixJob(env) {
         listView.save()
     }
 
-    // Create a Matrix Configuration inside the view
+    // Create a Freestyle Project inside the view
     def jobName = "Job_${env}"
-    def job = new MatrixConfiguration(jenkins, jobName)
+    def job = new FreeStyleProject(jenkins, jobName)
     job.save()
 
     // Set log rotation
@@ -37,15 +33,11 @@ def createMatrixJob(env) {
     // Configure source code management (none)
     job.scm = new NullSCM()
 
+    // Add dynamic axis
+    job.getBuildersList().add(new Shell("echo 'Hello, Jenkins! This is $env'"))
 
-
-    // Add an Execute Shell build step with a sample Java command
-    def shellScript = """
-        #!/bin/bash
-        echo 'Hello, Jenkins! This is $env'
-        java -jar your-java-application.jar --param1 \$custName
-    """
-    job.getBuildersList().add(new Shell(shellScript))
+    // Add user-defined axis
+    job.getBuildersList().add(new Shell("echo 'User-defined Axis: AxisValues'"))
 
     // Add masked and regex password parameters (replace with actual values)
     def maskedPassword = Secret.fromString("your_masked_password")
@@ -59,7 +51,7 @@ def createMatrixJob(env) {
     job.save()
 
     // Print a message
-    println("Jenkins Matrix Job '$jobName' created inside the view '$viewName'.")
+    println("Jenkins Freestyle Matrix Job '$jobName' created inside the view '$viewName'.")
 }
 
 // Call the function with the desired 'env' value
