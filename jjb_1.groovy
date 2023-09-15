@@ -8,6 +8,7 @@ import hudson.tasks.*
 import hudson.util.Secret
 
 def jenkins = Jenkins.instance
+jenkins.reload() 
 def viewName = '${env}_CS_view'
 
 // Check if the view already exists, and create it if not
