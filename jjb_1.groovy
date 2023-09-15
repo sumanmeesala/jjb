@@ -80,7 +80,7 @@ else {
 newV = hudson.model.Hudson.instance.getView(viewName)
 def newJ = env+'_CS_job' 
    println("job ' + $newV $newJ + ' adding -4.")
-viewName.doAddJobToView(newJ) 
+newV.doAddJobToView(newJ) 
 viewName.save()
 }
 
