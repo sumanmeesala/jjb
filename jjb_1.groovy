@@ -43,7 +43,7 @@ matrixJob('${env}_CS_job') {
     axes {
         axis {
             name('dynaxis')
-            valueString(DYNAMIC)
+            valueString('DYNAMIC')
         }
     }
 
