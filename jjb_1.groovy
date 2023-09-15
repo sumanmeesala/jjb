@@ -37,6 +37,7 @@ matrixJob(env+'_CS_job') {
 
     parameters {
         stringParam('custName', 'NONE', 'description')
+        stringParam('CC_CLIENTS', '', 'CC Clients')
     }
 
     axes {
@@ -46,12 +47,7 @@ matrixJob(env+'_CS_job') {
         }
     }
     
-    axes {
-        axis {
-            name('dynamic')
-            valueString(${CC_CLIENTS})
-        }
-    }
+
 
     def globalConfiguration = GlobalConfiguration.all().find { it.displayName == 'Mask Passwords and Regexes' }
 
