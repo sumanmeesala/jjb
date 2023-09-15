@@ -64,7 +64,7 @@ matrixJob(env+'_CS_job') {
     }
 
     steps {
-        shell('echo "' + env + '"')
+        shell('echo "' + CC_CLIENTS + '"')
     }
 
 
