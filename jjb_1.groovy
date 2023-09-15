@@ -37,11 +37,7 @@ def createMatrixJob(env) {
     // Configure source code management (none)
     job.scm = new NullSCM()
 
-    // Add dynamic axis
-    job.getAxes().add(new Axis("DynamicAxisName", "DynamicAxisValues"))
 
-    // Add user-defined axis
-    job.getAxes().add(new UserDefinedAxis("AxisName", "AxisValues"))
 
     // Add an Execute Shell build step with a sample Java command
     def shellScript = """
