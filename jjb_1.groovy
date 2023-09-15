@@ -25,11 +25,7 @@ if (existingView == null) {
 matrixJob(env+'_CS_job') {
     description('This is an 1st cc Job DSL job')
 
-    configure { project ->
-        project / 'logRotator' {
-            numToKeep(4) // Corrected method name here
-        }
-    }
+
 
     concurrentBuild(true)
 
