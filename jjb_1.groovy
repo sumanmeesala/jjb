@@ -70,19 +70,6 @@ matrixJob(env+'_CS_job') {
     jenkins.save()
   }
   
-  def jobName = env+'_CS_job'  
-      if (viewName instanceof ListView && jobName != null) {
-     println("job ' + $viewName $jobName + ' adding -3.")
-viewName.doAddJobToView(jobName) 
-viewName.save()
-} 
-else {
-newV = hudson.model.Hudson.instance.getView(viewName)
-def newJ = env+'_CS_job' 
-   println("job ' + $newV $newJ + ' adding -4.")
-newV.add(newJ) 
-viewName.save()
-}
 
 
 
