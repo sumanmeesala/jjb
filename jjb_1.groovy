@@ -9,7 +9,7 @@ import hudson.util.Secret
 
 def jenkins = Jenkins.instance
 jenkins.reload() 
-def viewName = '${env}_CS_view'
+def viewName = environment+'_CS_view'
 
 // Check if the view already exists, and create it if not
 def existingView = jenkins.getView(viewName)
@@ -22,7 +22,7 @@ if (existingView == null) {
     println("View '$viewName' already exists.")
 }
 
-matrixJob('${env}_CS_job') {
+matrixJob(environment+'_CS_job') {
     description('This is an 1st cc Job DSL job')
 
     configure { project ->
@@ -70,7 +70,7 @@ matrixJob('${env}_CS_job') {
     jenkins.save()
   }
   
-  def jobName = '${env}_CS_job'  
+  def jobName = environment+'_CS_job'  
       if (viewName instanceof ListView && jobName != null) {
      println("job ' + $viewName $jobName + ' adding -3.")
 viewName.doAddJobToView(jobName) 
@@ -78,10 +78,10 @@ viewName.save()
 } 
 else {
 newV = hudson.model.Hudson.instance.getView(viewName)
-def newJ = '${env}_CS_job' 
+def newJ = environment+'_CS_job' 
    println("job ' + $newV $newJ + ' adding -4.")
-newV.doAddJobToView(newJ) 
-newV.save()
+viewName.doAddJobToView(newJ) 
+viewName.save()
 }
 
 
