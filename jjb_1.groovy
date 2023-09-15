@@ -49,7 +49,7 @@ matrixJob(env+'_CS_job') {
     axes {
         axis {
             name('dynamic')
-            valueString(CC_CLIENTS)
+            valueString('${CC_CLIENTS}')
         }
     }
 
