@@ -43,6 +43,14 @@ matrixJob(env+'_CS_job') {
             valueString('USER')
         }
     }
+    
+        axes {
+        axis {
+            name('dynaxis')
+            type('dynamic')
+            values('DynamicAxisValue1', 'DynamicAxisValue2', 'DynamicAxisValue3') // Add your dynamic values here
+        }
+    }
 
     def globalConfiguration = GlobalConfiguration.all().find { it.displayName == 'Mask Passwords and Regexes' }
 
