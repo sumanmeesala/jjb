@@ -59,7 +59,7 @@ matrixJob(env+'_CS_job') {
     }
 
     steps {
-        shell('echo 'Hello, Jenkins! This is ${environment}'')
+        shell("echo 'Hello, Jenkins! This is ${environment}'")
     }
 
 
