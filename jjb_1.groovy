@@ -44,12 +44,10 @@ matrixJob(env+'_CS_job') {
         }
     }
     
-        axes {
-        axis {
-            name('dynaxis')
-            type('dynamic')
-            values('DynamicAxisValue1', 'DynamicAxisValue2', 'DynamicAxisValue3') // Add your dynamic values here
-        }
+    script {
+        def job = it // The matrix job being configured
+        def dynamicAxis = new hudson.matrix.LabelAxis('DynamicAxisName', ['DynamicAxisValue1', 'DynamicAxisValue2'])
+        job.setAxes(dynamicAxis)
     }
 
     def globalConfiguration = GlobalConfiguration.all().find { it.displayName == 'Mask Passwords and Regexes' }
