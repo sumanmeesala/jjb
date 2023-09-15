@@ -30,8 +30,7 @@ def createMatrixJob(env) {
     // Enable concurrent builds
     job.concurrentBuild = true
 
-    // Configure source code management (none)
-    job.scm = new NullSCM()
+
 
     // Add dynamic axis
     job.getBuildersList().add(new Shell("echo 'Hello, Jenkins! This is $env'"))
