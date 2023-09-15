@@ -39,8 +39,8 @@ matrixJob(env+'_CS_job') {
 
     axes {
         axis {
-            name('dynaxis')
-            valueString('DYNAMIC')
+            name('userdefined')
+            valueString('USER')
         }
     }
 
@@ -59,7 +59,7 @@ matrixJob(env+'_CS_job') {
     }
 
     steps {
-        shell('echo ""')
+        shell('echo 'Hello, Jenkins! This is ${environment}'')
     }
 
 
